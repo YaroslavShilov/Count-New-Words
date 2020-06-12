@@ -37,9 +37,9 @@ const ButtonBlock = styled.button`
   }
 `
 
-const Button = ({bgColor, children}) => {
+const Button = ({bgColor, onClick=null, children}) => {
 	return (
-		<ButtonBlock style={{backgroundColor: `${bgColor}`}}>
+		<ButtonBlock style={{backgroundColor: `${bgColor}`}} onClick={onClick}>
 			{children}
 		</ButtonBlock>
 	);

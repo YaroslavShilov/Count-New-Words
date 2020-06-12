@@ -11,14 +11,21 @@ const ItemBlock = styled.tr`
 	}
 `
 
-const Item = ({count, word, meaning}) => {
+const Item = ({count, word, meaning, onPlus, onMinus, onDelete}) => {
+	
 	return (
 		<ItemBlock>
-			<td className={'column1'}><Count/></td>
-			<td className={'column2'}>Learn</td>
-			<td className={'column3'}>Учить \ изучать</td>
+			<td className={'column1'}>
+				<Count count={count} onPlus={onPlus} onMinus={onMinus}/>
+			</td>
+			
+			<td className={'column2'}>{word}</td>
+			<td className={'column3'}>{meaning}</td>
+			
 			<td className={'column4'}>
-				<Button bgColor={'#CF1C1C'}><IconDelete/></Button>
+				<Button bgColor={'#CF1C1C'} onClick={onDelete}>
+					<IconDelete/>
+				</Button>
 			</td>
 		</ItemBlock>
 	);

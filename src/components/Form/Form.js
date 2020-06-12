@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
+import {connect} from "react-redux";
+import {countAdd} from "../../store/actions/actions";
 
 const FormBlock = styled.form`
 	display: flex;
@@ -12,7 +14,7 @@ const FormBlock = styled.form`
 	input {
 		width: 100%;
 		max-width: 400px;
-		height: 35px;
+		height: 32px;
 		margin-right: 15px;
 		padding-left: 10px;
 		padding-right: 10px;
@@ -33,7 +35,7 @@ const FormBlock = styled.form`
 	
 	button {
 		display: inline-block;
-		height: 35px;
+		height: 32px;
 		padding-left: 20px;
 		padding-right: 20px;
 		background-color: white;
@@ -47,19 +49,64 @@ const FormBlock = styled.form`
 	
 `
 
-const Form = () => {
+const Form = ({onAdd}) => {
+	const [state, setState] = useState({
+		word: '',
+		meaning: '',
+	})
 	
-	const onForm = (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault();
+		const wordSpace = state.word.replace(/\s/g, '');
+		const meaningSpace = state.meaning.replace(/\s/g, '');
+		
+		if(wordSpace.length !== 0 && meaningSpace.length !== 0) {
+			onAdd(state.word, state.meaning)
+			setState({
+				...state,
+				word: '',
+				meaning: '',
+			})
+		}
+		
+	}
+	const onChange = (e, type) => {
+		switch(type) {
+			case 'word': 
+				setState({...state, word: e.target.value})
+				break
+			case 'meaning': 
+				setState({...state, meaning: e.target.value})
+				break
+			default: setState({...state})
+		}
 	}
 	
 	return (
-		<FormBlock onSubmit={onForm}>
-			<input type="text" placeholder={'Word'} required/>
-			<input type="text" placeholder={'Meaning'} required/>
+		<FormBlock onSubmit={onSubmit}>
+			<input 
+				type="text" 
+				placeholder={'Word'} 
+				value={state.word} 
+				onChange={(e) => onChange(e, 'word')} 
+				required
+			/>
+			<input 
+				type="text" 
+			  placeholder={'Meaning'} 
+			  value={state.meaning} 
+				onChange={(e) => onChange(e, 'meaning')} 
+				required
+			/>
 			<button>Add</button>
 		</FormBlock>
 	);
 }
 
-export default Form
+function mapDispatchToProps(dispatch) {
+	return {
+		onAdd: (word, meaning) => dispatch(countAdd(word, meaning))
+	};
+}
+
+export default connect(null, mapDispatchToProps)(Form);

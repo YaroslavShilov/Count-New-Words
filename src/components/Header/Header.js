@@ -16,7 +16,7 @@ const HeaderBlock = styled.div`
 const Header = () => (
 	<HeaderBlock>
 		<h1>Count New Words</h1>
-		<p>add new words, count how many times did you meet it and decide, learn this word or no</p>
+		<p>add new words, count how many times do you meet these words during reading and decide, learn this word or no</p>
 	</HeaderBlock>
 );
 

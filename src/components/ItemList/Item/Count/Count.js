@@ -27,15 +27,15 @@ const CountBlock = styled.div`
 
 
 
-const Count = ({count}) => {
+const Count = ({count, onPlus, onMinus}) => {
 	return (
 		<CountBlock>
-			<p>#1</p>
+			<p>#{count}</p>
 			<div className={'buttons'}>
 				
-				<Button bgColor={'#089C20'}><IconPlus/></Button>
+				<Button bgColor={'#089C20'} onClick={onPlus}><IconPlus/></Button>
 				
-				<Button bgColor={'#E7AA10'}><IconMinus/></Button>
+				<Button bgColor={'#E7AA10'} onClick={onMinus}><IconMinus/></Button>
 				
 			</div>
 		</CountBlock>

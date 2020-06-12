@@ -38,7 +38,7 @@ const ItemListBlock = styled.table`
 
 
 
-const ItemList = ({list}) => {
+const ItemList = () => {
 	return (
 		<ItemListBlock>
 			<ItemListHead/>

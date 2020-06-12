@@ -13,9 +13,11 @@ const AppBlock = styled.div`
 `
 const AppWrap = styled.div`
 	max-width: 1400px;
+	min-width: 870px;
 	margin: 0 auto;
-	padding: 0 40px;
+	padding: 0 20px;
 `;
+
 
 
 function App() {
