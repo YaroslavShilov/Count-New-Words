@@ -29,7 +29,7 @@ export default function listReducer(state = initialState, action) {
 				id: (+new Date()).toString(16),
 				word: action.word,
 				meaning: action.meaning,
-				count: 0
+				count: 1
 			}
 			return [...state, newItem]
 			
