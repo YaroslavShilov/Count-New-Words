@@ -2,31 +2,23 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {connect} from "react-redux";
 import {countAdd} from "../../store/actions/actions";
+import Input from "../UI/Input";
 
 const FormBlock = styled.form`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 auto 40px;
-	padding: 16px 30px;
-	background-color: #36304A;
-	border-radius: 0 0 10px 10px;
+	margin: 0;
+	
 	input {
-		width: 100%;
 		max-width: 400px;
-		height: 32px;
-		margin-right: 15px;
-		padding-left: 10px;
-		padding-right: 10px;
+		margin-right: 10px;
 	}
-	input,
 	button {
 		border: none;
 		transition: all 0.3s ease;
 	}
-	input:active,
-	input:focus,
-	input:hover,
+	
 	button:hover,
 	button:focus {
 		outline: none;
@@ -84,14 +76,14 @@ const Form = ({onAdd}) => {
 	
 	return (
 		<FormBlock onSubmit={onSubmit}>
-			<input 
+			<Input 
 				type="text" 
 				placeholder={'Word'} 
 				value={state.word} 
 				onChange={(e) => onChange(e, 'word')} 
 				required
 			/>
-			<input 
+			<Input 
 				type="text" 
 			  placeholder={'Meaning'} 
 			  value={state.meaning} 

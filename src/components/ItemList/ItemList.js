@@ -15,7 +15,7 @@ const ItemListBlock = styled.table`
 	}
 	.column2,
 	.column3 {
-		min-width: 300px;
+		min-width: 150px;
 	}
 	.column2 {
 	
@@ -38,11 +38,11 @@ const ItemListBlock = styled.table`
 
 
 
-const ItemList = () => {
+const ItemList = ({list}) => {
 	return (
 		<ItemListBlock>
 			<ItemListHead/>
-			<ItemListBody/>
+			<ItemListBody list={list}/>
 		</ItemListBlock>
 	);
 }

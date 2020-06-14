@@ -21,7 +21,6 @@ const ItemListBody = ({list, onPlus, onMinus, onDelete, upload, download}) => {
 	}, [])
 	
 	useEffect(() => {
-		console.log('list upload');
 		upload();
 	}, [list, upload])
 	
@@ -45,12 +44,6 @@ const ItemListBody = ({list, onPlus, onMinus, onDelete, upload, download}) => {
 	);
 }
 
-function mapStateToProps(state) {
-	return {
-		list: state.list
-	};
-}
-
 function mapDispatchToProps(dispatch) {
 	return {
 		onPlus: (itemId) => dispatch(countPlus(itemId)),
@@ -61,4 +54,4 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemListBody);
+export default connect(null, mapDispatchToProps)(ItemListBody);
