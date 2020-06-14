@@ -58,7 +58,12 @@ function App({itemList}) {
 		})
 	}
 	
-	const visibleList = filterList(state.search, itemList)
+	const ratingList = (list) => {
+		return list.sort((prev, next) => next.count - prev.count);
+	}
+	
+	
+	const visibleList = ratingList(filterList(state.search, itemList));
 	
 	return (
 		<AppBlock>
