@@ -14,7 +14,6 @@ const AppBlock = styled.div`
 	color: #10222B;
 `
 const AppWrap = styled.div`
-	position: relative;
 	max-width: 1400px;
 	min-width: 520px;
 	margin: 0 auto;
@@ -23,14 +22,16 @@ const AppWrap = styled.div`
 
 const AppBottom = styled.div`
 	position: fixed;
-	left: 20px;
+	left: 50%;
 	bottom: 0;
+	max-width: calc(1400px - 40px);
 	width: calc(100% - 40px);
 	height: 96px;
 	padding: 12px 30px;
 	background-color: #36304A;
 	border-radius: 0 0 10px 10px;
 	overflow: hidden;
+	transform: translate(-50%, 0);
 `
 
 
