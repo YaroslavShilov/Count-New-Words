@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import Count from "./Count/Count";
 import LastButtons from "./LastButtons/LastButtons";
-import EditItem from "./EditItem/EditItem";
+import ViewWordMeaning from "./ViewWordMeaning/ViewWordMeaning";
 
 const ItemBlock = styled.tr`
 	transition: all 0.5s ease;
@@ -18,18 +18,10 @@ const Item = ({count, word, meaning, onPlus, onMinus, onDelete, onEdit}) => {
 	
 	const [state, setState] = useState({
 		edit: false,
+		delete: false,
 		word,
 		meaning,
 	})
-	
-	const editItem = () => {
-		setState({
-			...state,
-			word,
-			meaning,
-			edit: !state.edit
-		})
-	}
 	
 	useEffect(() => {
 		setState({
@@ -39,6 +31,9 @@ const Item = ({count, word, meaning, onPlus, onMinus, onDelete, onEdit}) => {
 		})
 		// eslint-disable-next-line
 	}, [word, meaning])
+
+	const editItem = () => setState({...state, edit: true});
+	const deleteItem = () => setState({...state, delete: true});
 	
 	const onChange = (e, type) => {
 		const value = e.target.value;
@@ -53,29 +48,24 @@ const Item = ({count, word, meaning, onPlus, onMinus, onDelete, onEdit}) => {
 		}
 	}
 	
-	const onApply = () => {
-		if(state.word === word && state.meaning === meaning) {
-			editItem();
-		} else {
-			onEdit(state.word, state.meaning);
-			editItem();
-		}
+	const onCancel = () => {
+		setState({
+			...state,
+			word,
+			meaning,
+			edit: false,
+			delete: false,
+		})
 	}
 	
-	const viewWordMeaning = (
-		state.edit
-			? <EditItem 
-					onApply={onApply} 
-					onCancel={editItem} 
-					onChange={onChange} 
-					word={state.word} 
-					meaning={state.meaning}
-				/>
-			: <>
-					<td className={'column2'}>{state.word}</td>
-					<td className={'column3'}>{state.meaning}</td>
-				</>
-	)
+	const onApplyEdit = () => {
+		if(state.word === word && state.meaning === meaning) {
+			onCancel();
+		} else {
+			onEdit(state.word, state.meaning);
+			onCancel();
+		}
+	}
 	
 	return (
 		<ItemBlock>
@@ -84,10 +74,25 @@ const Item = ({count, word, meaning, onPlus, onMinus, onDelete, onEdit}) => {
 			</td>
 			
 			
-			{viewWordMeaning}
+			<ViewWordMeaning 
+				isEdit={state.edit} 
+				word={state.word} 
+				meaning={state.meaning} 
+				onChange={onChange}
+			/>
 			
 			<td className={'column4'}>
-				<LastButtons onDelete={onDelete} onEdit={editItem}/>
+				<LastButtons
+					isDelete={state.delete}
+					onDelete={deleteItem}
+					onApplyDelete={onDelete}
+					
+					isEdit={state.edit}
+					onEdit={editItem}
+					onApplyEdit={onApplyEdit}
+					
+					onCancel={onCancel}
+				/>
 			</td>
 		</ItemBlock>
 	);
