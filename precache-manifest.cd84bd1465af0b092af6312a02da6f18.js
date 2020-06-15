@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f494e8347b91f75938a07da81ba1e29d",
+    "revision": "0946baa8bc914ebd4e5e5938bb812aa0",
     "url": "/Count-New-Words/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Count-New-Words/static/js/2.f206457c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c4f8e40a7e8f55c4b8a5",
-    "url": "/Count-New-Words/static/js/main.aeb5ee78.chunk.js"
+    "revision": "6b1407acd8115916babf",
+    "url": "/Count-New-Words/static/js/main.7c7cddec.chunk.js"
   },
   {
     "revision": "496273c2f72573360dcc",

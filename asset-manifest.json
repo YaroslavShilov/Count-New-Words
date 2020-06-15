@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/Count-New-Words/static/js/main.aeb5ee78.chunk.js",
-    "main.js.map": "/Count-New-Words/static/js/main.aeb5ee78.chunk.js.map",
+    "main.js": "/Count-New-Words/static/js/main.7c7cddec.chunk.js",
+    "main.js.map": "/Count-New-Words/static/js/main.7c7cddec.chunk.js.map",
     "runtime-main.js": "/Count-New-Words/static/js/runtime-main.61abe20c.js",
     "runtime-main.js.map": "/Count-New-Words/static/js/runtime-main.61abe20c.js.map",
     "static/js/2.f206457c.chunk.js": "/Count-New-Words/static/js/2.f206457c.chunk.js",
     "static/js/2.f206457c.chunk.js.map": "/Count-New-Words/static/js/2.f206457c.chunk.js.map",
     "index.html": "/Count-New-Words/index.html",
-    "precache-manifest.7887632735a78281153a236ff077eab1.js": "/Count-New-Words/precache-manifest.7887632735a78281153a236ff077eab1.js",
+    "precache-manifest.cd84bd1465af0b092af6312a02da6f18.js": "/Count-New-Words/precache-manifest.cd84bd1465af0b092af6312a02da6f18.js",
     "service-worker.js": "/Count-New-Words/service-worker.js",
     "static/js/2.f206457c.chunk.js.LICENSE.txt": "/Count-New-Words/static/js/2.f206457c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.61abe20c.js",
     "static/js/2.f206457c.chunk.js",
-    "static/js/main.aeb5ee78.chunk.js"
+    "static/js/main.7c7cddec.chunk.js"
   ]
 }
