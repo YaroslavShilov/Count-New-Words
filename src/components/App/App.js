@@ -4,7 +4,6 @@ import pattern from './bg/pattern.png';
 import Header from "../Header/Header";
 import ItemList from "../ItemList/ItemList";
 import Form from "../Form/Form";
-import Search from "../Search/Search";
 import {connect} from "react-redux";
 
 const AppBlock = styled.div`
@@ -17,7 +16,7 @@ const AppWrap = styled.div`
 	max-width: 1400px;
 	min-width: 520px;
 	margin: 0 auto;
-	padding: 0 20px 66px;
+	padding: 0 20px 26px;
 `;
 
 const AppBottom = styled.div`
@@ -26,7 +25,6 @@ const AppBottom = styled.div`
 	bottom: 0;
 	max-width: calc(1400px - 40px);
 	width: calc(100% - 40px);
-	height: 96px;
 	padding: 12px 30px;
 	background-color: #36304A;
 	border-radius: 0 0 10px 10px;
@@ -72,8 +70,7 @@ function App({itemList}) {
 				<Header/>
 				<ItemList list={visibleList}/>
 				<AppBottom>
-					<Search updateSearch={updateSearch}/>
-					<Form/>
+					<Form updateSearch={updateSearch}/>
 				</AppBottom>
 			</AppWrap>
 		</AppBlock>

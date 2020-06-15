@@ -41,7 +41,7 @@ const FormBlock = styled.form`
 	
 `
 
-const Form = ({onAdd}) => {
+const Form = ({onAdd, updateSearch}) => {
 	const [state, setState] = useState({
 		word: '',
 		meaning: '',
@@ -54,21 +54,24 @@ const Form = ({onAdd}) => {
 		
 		if(wordSpace.length !== 0 && meaningSpace.length !== 0) {
 			onAdd(state.word, state.meaning)
+			//updateSearch(''); //I want to save searchList 
 			setState({
 				...state,
-				word: '',
+				//word: '', //I want to save searchList 
 				meaning: '',
 			})
 		}
 		
 	}
-	const onChange = (e, type) => {
+	const onChange = (value, type) => {
+		
 		switch(type) {
-			case 'word': 
-				setState({...state, word: e.target.value})
+			case 'word':
+				updateSearch(value);
+				setState({...state, word: value})
 				break
 			case 'meaning': 
-				setState({...state, meaning: e.target.value})
+				setState({...state, meaning: value})
 				break
 			default: setState({...state})
 		}
@@ -78,16 +81,16 @@ const Form = ({onAdd}) => {
 		<FormBlock onSubmit={onSubmit}>
 			<Input 
 				type="text" 
-				placeholder={'Word'} 
+				placeholder={'Add or search the word'} 
 				value={state.word} 
-				onChange={(e) => onChange(e, 'word')} 
+				onChange={(e) => onChange(e.target.value, 'word')} 
 				required
 			/>
 			<Input 
 				type="text" 
 			  placeholder={'Meaning'} 
 			  value={state.meaning} 
-				onChange={(e) => onChange(e, 'meaning')} 
+				onChange={(e) => onChange(e.target.value, 'meaning')} 
 				required
 			/>
 			<button>Add</button>
