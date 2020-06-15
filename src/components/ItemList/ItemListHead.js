@@ -13,13 +13,13 @@ const ItemListHeadBlock = styled.thead`
 	}
 `
 
-const ItemListHead = () => (
+const ItemListHead = ({length}) => (
 	<ItemListHeadBlock>
 		<tr>
 			<th className={'column1'}>Count</th>
 			<th className={'column2'}>Word</th>
 			<th className={'column3'}>Meaning</th>
-			<th className={'column4'}></th>
+			<th className={'column4'}>{length}</th>
 		</tr>
 	</ItemListHeadBlock>
 );

@@ -41,7 +41,7 @@ const ItemListBlock = styled.table`
 const ItemList = ({list}) => {
 	return (
 		<ItemListBlock>
-			<ItemListHead/>
+			<ItemListHead length={list.length}/>
 			<ItemListBody list={list}/>
 		</ItemListBlock>
 	);
