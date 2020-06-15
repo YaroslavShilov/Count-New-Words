@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import styled from "styled-components";
 import Item from "./Item/Item";
 import {connect} from "react-redux";
-import {countDelete, countMinus, countPlus, localDownload, localUpload} from "../../store/actions/actions";
+import {countDelete, countMinus, countPlus, itemEdit, localDownload, localUpload} from "../../store/actions/actions";
 
 const ItemListBodyBlock = styled.tbody`
 	tr:nth-child(even) {
@@ -13,8 +13,8 @@ const ItemListBodyBlock = styled.tbody`
 	}
 	
 `
-const ItemListBody = ({list, onPlus, onMinus, onDelete, upload, download}) => {
-
+const ItemListBody = ({list, onPlus, onMinus, onDelete, upload, download, onEdit}) => {
+	
 	useEffect(() => {
 		download();
 		//eslint-disable-next-line
@@ -24,6 +24,7 @@ const ItemListBody = ({list, onPlus, onMinus, onDelete, upload, download}) => {
 		upload();
 	}, [list, upload])
 	
+	
 	const items = list.map(item => {
 		const {id, ...otherParam} = item;
 		return (
@@ -32,6 +33,7 @@ const ItemListBody = ({list, onPlus, onMinus, onDelete, upload, download}) => {
 				onDelete={() => onDelete(id)}
 				onPlus={() => onPlus(id)}
 				onMinus={() => onMinus(id)}
+				onEdit={(word, meaning) => onEdit(id, word, meaning)}
 				{...otherParam}
 			/>
 		)
@@ -49,6 +51,7 @@ function mapDispatchToProps(dispatch) {
 		onPlus: (itemId) => dispatch(countPlus(itemId)),
 		onMinus: (itemId) => dispatch(countMinus(itemId)),
 		onDelete: (itemId) => dispatch(countDelete(itemId)),
+		onEdit: (id, word, meaning) => dispatch(itemEdit(id, word, meaning)),
 		upload: () => dispatch(localUpload()),
 		download: () => dispatch(localDownload()),
 	};

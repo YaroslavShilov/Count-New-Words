@@ -68,7 +68,7 @@ function App({itemList}) {
 		<AppBlock>
 			<AppWrap>
 				<Header/>
-				<ItemList list={visibleList}/>
+				<ItemList list={visibleList} length={itemList.length}/>
 				<AppBottom>
 					<Form updateSearch={updateSearch}/>
 				</AppBottom>

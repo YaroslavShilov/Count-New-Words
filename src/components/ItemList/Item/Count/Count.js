@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import IconPlus from "../icons/IconPlus";
 import IconMinus from "../icons/IconMinus";
-import Button from "../Button/Button";
+import TableButton from "../../../UI/TableButton";
 
 const CountBlock = styled.div`
 	display: flex;
@@ -33,9 +33,9 @@ const Count = ({count, onPlus, onMinus}) => {
 			<p>#{count}</p>
 			<div className={'buttons'}>
 				
-				<Button bgColor={'#089C20'} onClick={onPlus}><IconPlus/></Button>
+				<TableButton bgColor={'#089C20'} onClick={onPlus}><IconPlus/></TableButton>
 				
-				<Button bgColor={'#E7AA10'} onClick={onMinus}><IconMinus/></Button>
+				<TableButton bgColor={'#E7AA10'} onClick={onMinus}><IconMinus/></TableButton>
 				
 			</div>
 		</CountBlock>

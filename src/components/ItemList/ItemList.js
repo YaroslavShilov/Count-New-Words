@@ -24,7 +24,8 @@ const ItemListBlock = styled.table`
 	
 	}
 	.column4 {
-		width: 58px;
+		width: 82px;
+		text-align:center;
 	}
 	tr>th:first-child,
 	tr>td:first-child {
@@ -38,10 +39,10 @@ const ItemListBlock = styled.table`
 
 
 
-const ItemList = ({list}) => {
+const ItemList = ({list, length}) => {
 	return (
 		<ItemListBlock>
-			<ItemListHead length={list.length}/>
+			<ItemListHead length={length}/>
 			<ItemListBody list={list}/>
 		</ItemListBlock>
 	);

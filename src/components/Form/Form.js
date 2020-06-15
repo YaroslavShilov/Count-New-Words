@@ -80,14 +80,12 @@ const Form = ({onAdd, updateSearch}) => {
 	return (
 		<FormBlock onSubmit={onSubmit}>
 			<Input 
-				type="text" 
 				placeholder={'Add or search the word'} 
 				value={state.word} 
 				onChange={(e) => onChange(e.target.value, 'word')} 
 				required
 			/>
 			<Input 
-				type="text" 
 			  placeholder={'Meaning'} 
 			  value={state.meaning} 
 				onChange={(e) => onChange(e.target.value, 'meaning')} 

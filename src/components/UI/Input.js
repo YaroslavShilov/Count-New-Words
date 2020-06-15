@@ -17,7 +17,7 @@ const InputBlock = styled.input`
 	}
 `;
 
-const Input = ({type, placeholder, value, onChange=null, required}) => {
+const Input = ({type='text', placeholder='', value='', onChange=null, required}) => {
 	return (
 		<InputBlock 
 			type={type} 

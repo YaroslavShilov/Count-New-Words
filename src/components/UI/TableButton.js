@@ -37,7 +37,7 @@ const ButtonBlock = styled.button`
   }
 `
 
-const Button = ({bgColor, onClick=null, children}) => {
+const TableButton = ({bgColor, onClick=null, children}) => {
 	return (
 		<ButtonBlock style={{backgroundColor: `${bgColor}`}} onClick={onClick}>
 			{children}
@@ -45,4 +45,4 @@ const Button = ({bgColor, onClick=null, children}) => {
 	);
 }
 
-export default Button
+export default TableButton

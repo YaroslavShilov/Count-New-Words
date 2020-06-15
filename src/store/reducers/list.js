@@ -1,4 +1,4 @@
-import {ADD, DELETE, DOWNLOAD, MINUS, PLUS, UPLOAD} from "../actions/actionTypes";
+import {ADD, DELETE, DOWNLOAD, EDIT, MINUS, PLUS, UPLOAD} from "../actions/actionTypes";
 
 const initialState = [
 	{
@@ -50,6 +50,17 @@ export default function listReducer(state = initialState, action) {
 		case DOWNLOAD:
 			const newState = JSON.parse(localStorage.getItem('list') || JSON.stringify(initialState));
 			return [...newState];
+			
+		case EDIT:
+			const {id, word, meaning} = action;
+			const index = state.findIndex(item => item.id === id)
+			const changeItem = {...state[index], word, meaning}
+			
+			return [
+				...state.slice(0, index),
+				changeItem,
+				...state.slice(index+1)
+			];
 		
 		default: return state;
 	}
