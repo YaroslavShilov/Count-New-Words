@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Count-New-Words/precache-manifest.068470974a0347de7e37a9fb1583d830.js"
+  "/Count-New-Words/precache-manifest.7887632735a78281153a236ff077eab1.js"
 );
 
 self.addEventListener('message', (event) => {
