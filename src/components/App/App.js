@@ -50,8 +50,8 @@ function App({itemList}) {
 		}
 		
 		return list.filter((item) => {
-			const itemWordUpper = item.word.toUpperCase();
-			const searchUpper = search.toUpperCase();
+			const itemWordUpper = item.word.toUpperCase().replace(/\s+/g, '');
+			const searchUpper = search.toUpperCase().replace(/\s+/g, '');
 
 			return itemWordUpper.indexOf(searchUpper) > -1;
 		})
