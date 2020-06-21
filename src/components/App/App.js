@@ -65,6 +65,7 @@ function App({itemList}) {
 	const visibleList = ratingList(filterList(state.search, itemList));
 	
 	return (
+		//**TODO: add preloader**/
 		<AppBlock>
 			<AppWrap>
 				<Header/>
