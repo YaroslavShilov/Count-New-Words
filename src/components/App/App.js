@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import ItemList from "../ItemList/ItemList";
 import Form from "../Form/Form";
 import {connect} from "react-redux";
+import Preloader from "../Preloader/Preloader";
 
 const AppBlock = styled.div`
 	min-height: 100vh;
@@ -65,8 +66,10 @@ function App({itemList}) {
 	const visibleList = ratingList(filterList(state.search, itemList));
 	
 	return (
-		//**TODO: add preloader**/
 		<AppBlock>
+			
+			<Preloader/>
+			
 			<AppWrap>
 				<Header/>
 				<ItemList list={visibleList} length={itemList.length}/>
@@ -84,6 +87,3 @@ function mapStateToProps(state) {
 	};
 }
 export default connect(mapStateToProps)(App);
-
-
-//**TODO: add function "edit"**//
