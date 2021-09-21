@@ -55,7 +55,6 @@ export default function listReducer(state = initialState, action) {
       return state;
 
     case DOWNLOAD:
-      console.log("down: ", action.data);
       /*
       // For localHost
       const newState = JSON.parse(

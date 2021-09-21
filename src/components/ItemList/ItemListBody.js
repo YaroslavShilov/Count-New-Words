@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Item from "./Item/Item";
 import { connect } from "react-redux";
@@ -28,27 +28,30 @@ const ItemListBody = ({
   upload,
   download,
   onEdit,
+  stateForJson,
 }) => {
-  useEffect(() => {
-    // For localHost
-    //;
+  const [downloadedData, setDownloadedData] = useState(false);
 
+  useEffect(() => {
     // For jsonServer
-    axios.get("/list").then(({ data }) => {
-      console.log("data:", data);
-      download(data);
+    axios.get("data").then(({ data: { list } }) => {
+      console.log("downloaded: ", list);
+      setDownloadedData(true);
+      download(list);
     });
 
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    console.log("list: ", list);
-    axios.patch("/list", list).then(() => {
-      console.log("axios update");
-      upload();
-    });
-  }, [list, upload]);
+    if (downloadedData) {
+      console.log("list: ", stateForJson);
+      axios.put("/data", { list: stateForJson }).then(({ data: { list } }) => {
+        console.log("axios update: ", list);
+        upload();
+      });
+    }
+  }, [stateForJson, downloadedData, upload]);
 
   const items = list.map((item) => {
     const { id, ...otherParam } = item;
