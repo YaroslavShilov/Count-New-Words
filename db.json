@@ -1,0 +1,22 @@
+{
+  "list": [
+    {
+      "id": 1,
+      "word": "Write",
+      "meaning": "Писать",
+      "count": 32
+    },
+    {
+      "id": 2,
+      "word": "Go",
+      "meaning": "Идти",
+      "count": 62
+    },
+    {
+      "id": 3,
+      "word": "Run",
+      "meaning": "Бежать",
+      "count": 22
+    }
+  ]
+}
