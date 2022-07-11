@@ -1,5 +1,21 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
+
+type Props = {
+  bgColor: string;
+  onClick: () => void;
+  children: React.ReactNode;
+};
+
+export const TableButton: React.FC<Props> = ({
+  bgColor,
+  onClick,
+  children,
+}) => (
+  <ButtonBlock style={{ backgroundColor: `${bgColor}` }} onClick={onClick}>
+    {children}
+  </ButtonBlock>
+);
 
 const ButtonBlock = styled.button`
   position: relative;
@@ -35,14 +51,4 @@ const ButtonBlock = styled.button`
   path {
     fill: white;
   }
-`
-
-const TableButton = ({bgColor, onClick=null, children}) => {
-	return (
-		<ButtonBlock style={{backgroundColor: `${bgColor}`}} onClick={onClick}>
-			{children}
-		</ButtonBlock>
-	);
-}
-
-export default TableButton
+`;
