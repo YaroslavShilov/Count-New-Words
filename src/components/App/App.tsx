@@ -51,7 +51,7 @@ function App() {
     <AppBlock>
       <Preloader />
 
-      <AppWrap>
+      {/*<AppWrap>
         <Header />
 
         <List list={visible} length={visible.length} />
@@ -59,7 +59,7 @@ function App() {
         <AppBottom>
           <Form updateSearch={updateSearch} />
         </AppBottom>
-      </AppWrap>
+      </AppWrap>*/}
     </AppBlock>
   );
 }
