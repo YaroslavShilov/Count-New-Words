@@ -5,8 +5,8 @@ import { List } from "../List/List";
 import { Form } from "../Form";
 import { Preloader } from "../Preloader/Preloader";
 import styled from "styled-components";
-import { RootState } from "../../store";
-import { downloadState, ItemState } from "../List/listSlice";
+import { RootState } from "../../store/store";
+import { fetchWords, WordType } from "../../store/listSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   const [search, setSearch] = useState<string>("");
-  const [visible, setVisible] = useState<ItemState[]>(
+  const [visible, setVisible] = useState<WordType[]>(
     ratingList(filterList(search, list))
   );
 
@@ -22,25 +22,26 @@ function App() {
     setSearch(search);
   }, []);
 
-  function filterList(search: string, list: ItemState[]) {
+  function filterList(search: string, list: WordType[]) {
     if (search.length === 0) {
       return list;
     }
 
+    const searchUpper = search.toUpperCase().replace(/\s+/g, "");
+
     return list.filter((item) => {
       const itemWordUpper = item.word.toUpperCase().replace(/\s+/g, "");
-      const searchUpper = search.toUpperCase().replace(/\s+/g, "");
 
       return itemWordUpper.indexOf(searchUpper) > -1;
     });
   }
 
-  function ratingList(list: ItemState[]): ItemState[] {
+  function ratingList(list: WordType[]): WordType[] {
     return [...list].sort((prev, next) => next.count - prev.count);
   }
 
   useEffect(() => {
-    dispatch(downloadState());
+    dispatch(fetchWords());
   }, [dispatch]);
 
   useEffect(() => {
@@ -50,8 +51,7 @@ function App() {
   return (
     <AppBlock>
       <Preloader />
-
-      {/*<AppWrap>
+      <AppWrap>
         <Header />
 
         <List list={visible} length={visible.length} />
@@ -59,7 +59,7 @@ function App() {
         <AppBottom>
           <Form updateSearch={updateSearch} />
         </AppBottom>
-      </AppWrap>*/}
+      </AppWrap>
     </AppBlock>
   );
 }

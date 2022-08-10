@@ -8,62 +8,38 @@ import IconApply from "./icons/IconApply";
 import IconClose from "./icons/IconClose";
 import IconEdit from "./icons/IconEdit";
 import IconDelete from "./icons/IconDelete";
+import {
+  changeWordCount,
+  deleteWord,
+  editWord,
+  WordType,
+} from "../../../store/listSlice";
+import { useAppDispatch } from "../../../hooks";
 
-type Props = {
-  count: number;
-  word: string;
-  meaning: string;
-  onPlus: () => void;
-  onMinus: () => void;
-  onDelete: () => void;
-  onEdit: (word: string, meaning: string) => void;
-};
-
-export const ListItem: React.FC<Props> = ({
-  count,
-  word,
-  meaning,
-  onPlus,
-  onMinus,
-  onDelete,
-  onEdit,
-}) => {
+export const ListItem: React.FC<WordType> = ({ id, count, word, meaning }) => {
   const [state, setState] = useState({
     edit: false,
     delete: false,
+    count,
     word,
     meaning,
   });
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    setState({
-      ...state,
-      word,
-      meaning,
-    });
-    // eslint-disable-next-line
-  }, [word, meaning]);
+    // If store change, we need to change it in local state
+    setState((state) => ({ ...state, word, meaning, count }));
+  }, [word, meaning, count]);
 
   const editItem = () => setState({ ...state, edit: true });
   const deleteItem = () => setState({ ...state, delete: true });
 
   const onChange =
-    (type: "word" | "meaning") => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
+    (type: "word" | "meaning") => (e: React.ChangeEvent<HTMLInputElement>) =>
+      setState({ ...state, [type]: e.target.value });
 
-      switch (type) {
-        case "word":
-          setState({ ...state, word: value });
-          break;
-        case "meaning":
-          setState({ ...state, meaning: value });
-          break;
-        default:
-          return null;
-      }
-    };
-
-  const onCancel = () => {
+  const cancelHandler = () => {
     setState({
       ...state,
       word,
@@ -73,26 +49,35 @@ export const ListItem: React.FC<Props> = ({
     });
   };
 
-  const onApplyEdit = () => {
+  const applyEditHandler = () => {
     if (state.word === word && state.meaning === meaning) {
-      onCancel();
-    } else {
-      onEdit(state.word, state.meaning);
-      onCancel();
+      return cancelHandler();
     }
+
+    dispatch(editWord({ id, word: state.word, meaning: state.meaning }));
+    cancelHandler();
   };
+
+  const deleteHandler = () => {
+    dispatch(deleteWord(id));
+    cancelHandler();
+  };
+
+  const countHandler = (type: "increase" | "decrease") => () =>
+    dispatch(changeWordCount({ id, type }));
 
   return (
     <ItemBlock>
       <td className="column1">
         <CountBlock>
           <p>#{count}</p>
+
           <div className="buttons">
-            <TableButton bgColor="#089C20" onClick={onPlus}>
+            <TableButton bgColor="#089C20" onClick={countHandler("increase")}>
               <IconPlus />
             </TableButton>
 
-            <TableButton bgColor="#E7AA10" onClick={onMinus}>
+            <TableButton bgColor="#E7AA10" onClick={countHandler("decrease")}>
               <IconMinus />
             </TableButton>
           </div>
@@ -121,12 +106,12 @@ export const ListItem: React.FC<Props> = ({
             <React.Fragment>
               <TableButton
                 bgColor={"#E0E048"}
-                onClick={state.delete ? onDelete : onApplyEdit}
+                onClick={state.delete ? deleteHandler : applyEditHandler}
               >
                 <IconApply />
               </TableButton>
 
-              <TableButton bgColor={"#CF1C1C"} onClick={onCancel}>
+              <TableButton bgColor={"#CF1C1C"} onClick={cancelHandler}>
                 <IconClose />
               </TableButton>
             </React.Fragment>

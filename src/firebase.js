@@ -1,3 +1,5 @@
+/*
+// @ts-nocheck
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 import { initializeApp } from "firebase/app";
@@ -63,3 +65,4 @@ const logInWithEmailAndPassword = async (email, password) => {
     alert(err.message);
   }
 };
+*/

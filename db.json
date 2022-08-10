@@ -1,0 +1,16 @@
+{
+  "list": [
+    {
+      "id": 1,
+      "word": "Write",
+      "meaning": "Писать12",
+      "count": 12
+    },
+    {
+      "id": 3,
+      "word": "Run",
+      "meaning": "Бежать",
+      "count": 33
+    }
+  ]
+}

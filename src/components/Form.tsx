@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Input } from "./UI/Input";
 import { useAppDispatch } from "../hooks";
-import { addItem } from "./List/listSlice";
+import { addNewWord } from "../store/listSlice";
 
 type Props = {
   updateSearch: (string: string) => void;
@@ -24,15 +24,16 @@ export const Form: React.FC<Props> = React.memo(({ updateSearch }) => {
     if (wordSpace.length !== 0 && meaningSpace.length !== 0) {
       const { word, meaning } = state;
 
-      dispatch(addItem({ word, meaning }));
-      //updateSearch(''); //I want to save searchList
+      dispatch(addNewWord({ word, meaning }));
+      //updateSearch(''); //I want to save the value in searchList input
       setState({
         ...state,
-        //word: '', //I want to save searchList
+        //word: '', //I want to save the value in searchList input
         meaning: "",
       });
     }
   };
+
   const onChange =
     (type: "word" | "meaning") => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
@@ -49,11 +50,6 @@ export const Form: React.FC<Props> = React.memo(({ updateSearch }) => {
           setState({ ...state });
       }
     };
-
-  /*
-useEffect(() => {
-  upload();
-}, [list, upload]);*/
 
   return (
     <FormBlock onSubmit={onSubmit}>

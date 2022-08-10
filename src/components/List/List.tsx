@@ -1,51 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  deleteItem,
-  editItem,
-  ItemState,
-  minusOne,
-  plusOne,
-} from "./listSlice";
+import { WordType } from "../../store/listSlice";
 import { ListItem } from "./ListItem/ListItem";
-import { useAppDispatch } from "../../hooks";
 
 type Props = {
-  list: ItemState[];
+  list: WordType[];
   length: number;
 };
 
-export const List: React.FC<Props> = ({ list, length }) => {
-  const dispatch = useAppDispatch();
+export const List: React.FC<Props> = ({ list, length }) => (
+  <ListBlock>
+    <ListHead>
+      <tr>
+        <th className={"column1"}>Count</th>
+        <th className={"column2"}>Word</th>
+        <th className={"column3"}>Meaning</th>
+        <th className={"column4"}>{length}</th>
+      </tr>
+    </ListHead>
 
-  return (
-    <ListBlock>
-      <ListHead>
-        <tr>
-          <th className={"column1"}>Count</th>
-          <th className={"column2"}>Word</th>
-          <th className={"column3"}>Meaning</th>
-          <th className={"column4"}>{length}</th>
-        </tr>
-      </ListHead>
-
-      <ListBody>
-        {list.map(({ id, ...otherParam }) => (
-          <ListItem
-            key={id}
-            onDelete={() => dispatch(deleteItem(id))}
-            onPlus={() => dispatch(plusOne(id))}
-            onMinus={() => dispatch(minusOne(id))}
-            onEdit={(word: string, meaning: string) =>
-              dispatch(editItem({ word, meaning, id }))
-            }
-            {...otherParam}
-          />
-        ))}
-      </ListBody>
-    </ListBlock>
-  );
-};
+    <ListBody>
+      {list.map((item) => (
+        <ListItem key={item.id} {...item} />
+      ))}
+    </ListBody>
+  </ListBlock>
+);
 
 const ListBlock = styled.table`
   width: 100%;
@@ -90,6 +70,7 @@ const ListHead = styled.thead`
     text-align: left;
   }
 `;
+
 const ListBody = styled.tbody`
   tr:nth-child(even) {
     background-color: rgba(245, 245, 245, 0.9);
