@@ -3,7 +3,23 @@
 }
 
 .root h1 {
-  margin: 0 0 3px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 3px;
+}
+
+.root span {
+  width: 25px;
+  height: 25px;
+
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.root span:hover {
+  color: #36304a;
 }
 
 .root p {

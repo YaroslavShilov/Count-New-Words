@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Input } from "../ui/Input/Input.tsx";
-import { addNewWord } from "../store/listSlice";
+import { DispatchContext } from "../../store/context.ts";
 import styles from "./Form.module.css";
 
 type Props = {
@@ -13,16 +13,15 @@ export const Form = ({ updateSearch }: Props) => {
     meaning: "",
   });
 
+  const dispatch = useContext(DispatchContext);
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const wordSpace = state.word.replace(/\s/g, "");
-    const meaningSpace = state.meaning.replace(/\s/g, "");
+    const { word, meaning } = state;
 
-    if (wordSpace.length !== 0 && meaningSpace.length !== 0) {
-      const { word, meaning } = state;
+    if (word.trim() && meaning.trim()) {
+      dispatch({ type: "add", word, meaning });
 
-      dispatch(addNewWord({ word, meaning }));
-      //updateSearch(''); //I want to save the value in searchList input
       setState({
         ...state,
         //word: '', //I want to save the value in searchList input
@@ -35,16 +34,11 @@ export const Form = ({ updateSearch }: Props) => {
     (type: "word" | "meaning") => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
-      switch (type) {
-        case "word":
-          updateSearch(value);
-          setState({ ...state, word: value });
-          break;
-        case "meaning":
-          setState({ ...state, meaning: value });
-          break;
-        default:
-          setState({ ...state });
+      if (type === "word") {
+        updateSearch(value);
+        setState({ ...state, word: value });
+      } else {
+        setState({ ...state, meaning: value });
       }
     };
 

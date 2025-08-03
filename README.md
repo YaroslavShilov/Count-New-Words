@@ -9,3 +9,12 @@ With this application, you can add the word and count every time you come across
 [Application Link](https://yaroslavshilov.github.io/Count-New-Words/)
 
 ---
+
+## Run:
+### Local
+1. npm i
+2. npm run server
+3. npm run dev
+
+### Local Storage (for github pages)
+1. Run web version (github pages)

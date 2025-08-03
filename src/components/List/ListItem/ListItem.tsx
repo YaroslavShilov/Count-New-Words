@@ -1,12 +1,13 @@
-import { Fragment, useEffect, useState } from "react";
+import {
+  type ChangeEvent,
+  type KeyboardEvent,
+  Fragment,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { TableButton } from "../../ui/TableButton/TableButton";
 import { Input } from "../../ui/Input/Input";
-import {
-  changeWordCount,
-  deleteWord,
-  editWord,
-  WordType,
-} from "../../../store/listSlice";
 import {
   ApplyIcon,
   CloseIcon,
@@ -15,9 +16,11 @@ import {
   MinusIcon,
   PlusIcon,
 } from "../../ui/Icons";
-import styles from "./listItem.module.css";
+import { DispatchContext } from "../../../store/context.ts";
+import type { WordItem } from "../../../store/reducer.ts";
+import styles from "../List.module.css";
 
-export const ListItem = ({ id, count, word, meaning }: WordType) => {
+export const ListItem = ({ id, count, word, meaning }: WordItem) => {
   const [state, setState] = useState({
     edit: false,
     delete: false,
@@ -26,7 +29,7 @@ export const ListItem = ({ id, count, word, meaning }: WordType) => {
     meaning,
   });
 
-  const dispatch = useAppDispatch();
+  const dispatch = useContext(DispatchContext);
 
   useEffect(() => {
     // If store change, we need to change it in local state
@@ -37,7 +40,7 @@ export const ListItem = ({ id, count, word, meaning }: WordType) => {
   const deleteItem = () => setState({ ...state, delete: true });
 
   const onChange =
-    (type: "word" | "meaning") => (e: React.ChangeEvent<HTMLInputElement>) =>
+    (type: "word" | "meaning") => (e: ChangeEvent<HTMLInputElement>) =>
       setState({ ...state, [type]: e.target.value });
 
   const cancelHandler = () => {
@@ -50,22 +53,28 @@ export const ListItem = ({ id, count, word, meaning }: WordType) => {
     });
   };
 
-  const applyEditHandler = () => {
+  const applyHandler = () => {
     if (state.word === word && state.meaning === meaning) {
       return cancelHandler();
     }
 
-    dispatch(editWord({ id, word: state.word, meaning: state.meaning }));
+    dispatch({ type: "edit", id, word: state.word, meaning: state.meaning });
     cancelHandler();
+  };
+
+  const keyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      applyHandler();
+    }
   };
 
   const deleteHandler = () => {
-    dispatch(deleteWord(id));
+    dispatch({ type: "delete", id });
     cancelHandler();
   };
 
-  const countHandler = (type: "increase" | "decrease") => () =>
-    dispatch(changeWordCount({ id, type }));
+  const countHandler = (type: "increaseCounter" | "decreaseCounter") => () =>
+    dispatch({ type, id });
 
   return (
     <tr className={styles.item}>
@@ -74,11 +83,17 @@ export const ListItem = ({ id, count, word, meaning }: WordType) => {
           <p>#{count}</p>
 
           <div className={styles.count__btns}>
-            <TableButton bgColor="#089C20" onClick={countHandler("increase")}>
+            <TableButton
+              bgColor="#089C20"
+              onClick={countHandler("increaseCounter")}
+            >
               <PlusIcon />
             </TableButton>
 
-            <TableButton bgColor="#E7AA10" onClick={countHandler("decrease")}>
+            <TableButton
+              bgColor="#E7AA10"
+              onClick={countHandler("decreaseCounter")}
+            >
               <MinusIcon />
             </TableButton>
           </div>
@@ -88,10 +103,18 @@ export const ListItem = ({ id, count, word, meaning }: WordType) => {
       {state.edit ? (
         <Fragment>
           <td className={styles.col2}>
-            <Input value={state.word} onChange={onChange("word")} />
+            <Input
+              value={state.word}
+              onChange={onChange("word")}
+              onKeyDown={keyDownHandler}
+            />
           </td>
           <td className={styles.col3}>
-            <Input value={state.meaning} onChange={onChange("meaning")} />
+            <Input
+              value={state.meaning}
+              onChange={onChange("meaning")}
+              onKeyDown={keyDownHandler}
+            />
           </td>
         </Fragment>
       ) : (
@@ -107,7 +130,7 @@ export const ListItem = ({ id, count, word, meaning }: WordType) => {
             <Fragment>
               <TableButton
                 bgColor="#E0E048"
-                onClick={state.delete ? deleteHandler : applyEditHandler}
+                onClick={state.delete ? deleteHandler : applyHandler}
               >
                 <ApplyIcon />
               </TableButton>

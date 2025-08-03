@@ -1,20 +1,19 @@
-import { WordType } from "../../store/listSlice";
 import { ListItem } from "./ListItem/ListItem";
 import styles from "./List.module.css";
+import type { WordItem } from "../../store/reducer.ts";
 
 type Props = {
-  list: WordType[];
-  length: number;
+  list: WordItem[];
 };
 
-export const List = ({ list, length }: Props) => (
+export const List = ({ list }: Props) => (
   <table className={styles.root}>
     <thead className={styles.thead}>
       <tr>
         <th className={styles.col1}>Count</th>
         <th className={styles.col2}>Word</th>
         <th className={styles.col3}>Meaning</th>
-        <th className={styles.col4}>{length}</th>
+        <th className={styles.col4}>{list.length}</th>
       </tr>
     </thead>
 

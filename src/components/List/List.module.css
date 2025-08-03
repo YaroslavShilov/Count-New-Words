@@ -79,13 +79,13 @@
   font-weight: bold;
 }
 
-.cont__btns {
+.count__btns {
   display: flex;
   align-items: center;
   margin-left: 10px;
 }
 
-.cont__btns button:not(:last-child) {
+.count__btns button:not(:last-child) {
   margin-right: 5px;
 }
 

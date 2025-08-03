@@ -1,15 +1,31 @@
+import { InfoIcon } from "../ui/Icons.tsx";
+import { useState } from "react";
 import styles from "./Header.module.css";
 
-export const Header = () => (
-  <header className={styles.root}>
-    <h1>Count New Words</h1>
-    <p>
-      When you meet a new word during reading, watching a video, or something
-      else. You don't know how many times you'll meet this word again, and you
-      can't decide to learn this word or no. You can add this word using this
-      application and every time when you meet this word you count. After
-      reading or something else you get a result of counting. It helps you to
-      decide. "learn this word or no"
-    </p>
-  </header>
-);
+export const Header = () => {
+  const [details, setDetails] = useState<boolean>(false);
+
+  const toggleDetails = () => setDetails(!details);
+
+  return (
+    <header className={styles.root}>
+      <h1>
+        Count New Words
+        <span onClick={toggleDetails}>
+          <InfoIcon />
+        </span>
+      </h1>
+      {details && (
+        <p>
+          When you encounter a new word while reading, watching a video, or
+          doing something else, you often don’t know how many times you’ll see
+          that word again, and you can’t decide whether to learn it or not. With
+          this application, you can add the word and count every time you come
+          across it. After reading or watching, you get a summary of how many
+          times the word appeared. This helps you decide whether to learn the
+          word or not.
+        </p>
+      )}
+    </header>
+  );
+};
