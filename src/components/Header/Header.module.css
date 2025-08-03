@@ -1,0 +1,13 @@
+.root {
+  text-align: center;
+}
+
+.root h1 {
+  margin: 0 0 3px 0;
+}
+
+.root p {
+  margin: 0;
+  padding-top: 3px;
+  opacity: 0.4;
+}

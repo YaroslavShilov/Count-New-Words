@@ -1,0 +1,40 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.root input {
+  max-width: 400px;
+  margin-right: 10px;
+}
+
+.root button {
+  display: inline-block;
+  height: 32px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  background-color: white;
+  border: none;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.root button:hover,
+.root button:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #36304a,
+    0 0 0 4px white;
+}
+
+.root button:active {
+  transition: all 0.1s ease;
+  box-shadow:
+    0 0 0 0 black,
+    0 0 0 0 black,
+    inset 0 0 8px 0 black;
+}

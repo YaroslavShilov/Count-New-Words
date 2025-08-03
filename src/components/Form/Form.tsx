@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { Input } from "./UI/Input";
-import { useAppDispatch } from "../hooks";
+import { Input } from "../ui/Input/Input.tsx";
 import { addNewWord } from "../store/listSlice";
+import styles from "./Form.module.css";
 
 type Props = {
   updateSearch: (string: string) => void;
 };
 
-export const Form: React.FC<Props> = React.memo(({ updateSearch }) => {
-  const dispatch = useAppDispatch();
-
+export const Form = ({ updateSearch }: Props) => {
   const [state, setState] = useState({
     word: "",
     meaning: "",
@@ -52,7 +49,7 @@ export const Form: React.FC<Props> = React.memo(({ updateSearch }) => {
     };
 
   return (
-    <FormBlock onSubmit={onSubmit}>
+    <form className={styles.root} onSubmit={onSubmit}>
       <Input
         placeholder={"Add or search the word"}
         value={state.word}
@@ -66,42 +63,6 @@ export const Form: React.FC<Props> = React.memo(({ updateSearch }) => {
         required
       />
       <button>Add</button>
-    </FormBlock>
+    </form>
   );
-});
-
-const FormBlock = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-
-  input {
-    max-width: 400px;
-    margin-right: 10px;
-  }
-  button {
-    border: none;
-    transition: all 0.3s ease;
-  }
-
-  button:hover,
-  button:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px #36304a, 0 0 0 4px white;
-  }
-
-  button {
-    display: inline-block;
-    height: 32px;
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: white;
-    cursor: pointer;
-  }
-
-  button:active {
-    transition: all 0.1s ease;
-    box-shadow: 0 0 0 0 black, 0 0 0 0 black, inset 0 0 8px 0 black;
-  }
-`;
+};

@@ -6,4 +6,6 @@ When you encounter a new word while reading, watching a video, or doing somethin
 
 With this application, you can add the word and count every time you come across it. After reading or watching, you get a summary of how many times the word appeared. This helps you decide whether to learn the word or not.
 
-#### [Application Link](https://yaroslavshilov.github.io/Count-New-Words/)
+[Application Link](https://yaroslavshilov.github.io/Count-New-Words/)
+
+---

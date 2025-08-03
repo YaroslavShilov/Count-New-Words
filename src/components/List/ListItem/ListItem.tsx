@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { TableButton } from "../../UI/TableButton";
-import IconPlus from "./icons/IconPlus";
-import IconMinus from "./icons/IconMinus";
-import { Input } from "../../UI/Input";
-import IconApply from "./icons/IconApply";
-import IconClose from "./icons/IconClose";
-import IconEdit from "./icons/IconEdit";
-import IconDelete from "./icons/IconDelete";
+import { Fragment, useEffect, useState } from "react";
+import { TableButton } from "../../ui/TableButton/TableButton";
+import { Input } from "../../ui/Input/Input";
 import {
   changeWordCount,
   deleteWord,
   editWord,
   WordType,
 } from "../../../store/listSlice";
-import { useAppDispatch } from "../../../hooks";
+import {
+  ApplyIcon,
+  CloseIcon,
+  DeleteIcon,
+  EditIcon,
+  MinusIcon,
+  PlusIcon,
+} from "../../ui/Icons";
+import styles from "./listItem.module.css";
 
-export const ListItem: React.FC<WordType> = ({ id, count, word, meaning }) => {
+export const ListItem = ({ id, count, word, meaning }: WordType) => {
   const [state, setState] = useState({
     edit: false,
     delete: false,
@@ -67,105 +68,67 @@ export const ListItem: React.FC<WordType> = ({ id, count, word, meaning }) => {
     dispatch(changeWordCount({ id, type }));
 
   return (
-    <ItemBlock>
-      <td className="column1">
-        <CountBlock>
+    <tr className={styles.item}>
+      <td className={styles.col1}>
+        <div className={styles.count}>
           <p>#{count}</p>
 
-          <div className="buttons">
+          <div className={styles.count__btns}>
             <TableButton bgColor="#089C20" onClick={countHandler("increase")}>
-              <IconPlus />
+              <PlusIcon />
             </TableButton>
 
             <TableButton bgColor="#E7AA10" onClick={countHandler("decrease")}>
-              <IconMinus />
+              <MinusIcon />
             </TableButton>
           </div>
-        </CountBlock>
+        </div>
       </td>
 
       {state.edit ? (
-        <React.Fragment>
-          <td className="column2">
+        <Fragment>
+          <td className={styles.col2}>
             <Input value={state.word} onChange={onChange("word")} />
           </td>
-          <td className="column3">
+          <td className={styles.col3}>
             <Input value={state.meaning} onChange={onChange("meaning")} />
           </td>
-        </React.Fragment>
+        </Fragment>
       ) : (
-        <React.Fragment>
-          <td className="column2">{state.word}</td>
-          <td className="column3">{state.meaning}</td>
-        </React.Fragment>
+        <Fragment>
+          <td className={styles.col2}>{state.word}</td>
+          <td className={styles.col3}>{state.meaning}</td>
+        </Fragment>
       )}
 
-      <td className="column4">
-        <LastButtonsBlock>
+      <td className={styles.col4}>
+        <div className={styles.actionBtns}>
           {state.delete || state.edit ? (
-            <React.Fragment>
+            <Fragment>
               <TableButton
-                bgColor={"#E0E048"}
+                bgColor="#E0E048"
                 onClick={state.delete ? deleteHandler : applyEditHandler}
               >
-                <IconApply />
+                <ApplyIcon />
               </TableButton>
 
               <TableButton bgColor={"#CF1C1C"} onClick={cancelHandler}>
-                <IconClose />
+                <CloseIcon />
               </TableButton>
-            </React.Fragment>
+            </Fragment>
           ) : (
-            <React.Fragment>
+            <Fragment>
               <TableButton bgColor={"#D4DBF5"} onClick={editItem}>
-                <IconEdit />
+                <EditIcon />
               </TableButton>
 
               <TableButton bgColor={"#CF1C1C"} onClick={deleteItem}>
-                <IconDelete />
+                <DeleteIcon />
               </TableButton>
-            </React.Fragment>
+            </Fragment>
           )}
-        </LastButtonsBlock>
+        </div>
       </td>
-    </ItemBlock>
+    </tr>
   );
 };
-
-const ItemBlock = styled.tr`
-  transition: all 0.5s ease;
-  td {
-    padding: 12px 10px;
-  }
-  input {
-    box-shadow: 0 0 0 1px #36304a;
-  }
-`;
-
-const CountBlock = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  p {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .buttons {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    button:not(:last-child) {
-      margin-right: 5px;
-    }
-  }
-`;
-
-const LastButtonsBlock = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  button:not(:first-child) {
-    margin-left: 5px;
-  }
-`;

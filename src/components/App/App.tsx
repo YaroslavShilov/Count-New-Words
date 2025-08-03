@@ -1,22 +1,21 @@
-import React, { useCallback, useEffect, useState } from "react";
-import pattern from "./bg/pattern.png";
+import { useCallback, useEffect, useState } from "react";
+import bg from "../../assets/bg.png";
 import { Header } from "../Header";
 import { List } from "../List/List";
-import { Form } from "../Form";
+import { Form } from "../Form/Form.tsx";
 import { Preloader } from "../Preloader/Preloader";
-import styled from "styled-components";
 import { RootState } from "../../store/store";
 import { fetchWords, WordType } from "../../store/listSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import styles from "src/components/App/App.module.css";
 
 function App() {
   const list = useAppSelector((state: RootState) => state.list);
-  const dispatch = useAppDispatch();
-
   const [search, setSearch] = useState<string>("");
   const [visible, setVisible] = useState<WordType[]>(
-    ratingList(filterList(search, list))
+    ratingList(filterList(search, list)),
   );
+
+  const dispatch = useAppDispatch();
 
   const updateSearch = useCallback((search: string): void => {
     setSearch(search);
@@ -49,45 +48,24 @@ function App() {
   }, [search, list]);
 
   return (
-    <AppBlock>
+    <div
+      className={styles.root}
+      style={{
+        background: `url("${bg}") repeat top left`,
+      }}
+    >
       <Preloader />
-      <AppWrap>
+      <div className={styles.content}>
         <Header />
 
         <List list={visible} length={visible.length} />
 
-        <AppBottom>
+        <div className={styles.form}>
           <Form updateSearch={updateSearch} />
-        </AppBottom>
-      </AppWrap>
-    </AppBlock>
+        </div>
+      </div>
+    </div>
   );
 }
-
-const AppBlock = styled.div`
-  min-height: 100vh;
-  padding: 30px 0;
-  background: url("${pattern}") repeat top left;
-  color: #10222b;
-`;
-const AppWrap = styled.div`
-  max-width: 1400px;
-  min-width: 520px;
-  margin: 0 auto;
-  padding: 0 20px 26px;
-`;
-
-const AppBottom = styled.div`
-  position: fixed;
-  left: 50%;
-  bottom: 0;
-  max-width: calc(1400px - 40px);
-  width: calc(100% - 40px);
-  padding: 12px 30px;
-  background-color: #36304a;
-  border-radius: 0 0 10px 10px;
-  overflow: hidden;
-  transform: translate(-50%, 0);
-`;
 
 export default App;

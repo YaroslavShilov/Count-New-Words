@@ -1,0 +1,95 @@
+.root {
+  width: 100%;
+  margin: 40px auto 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-collapse: collapse;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+
+.root tr > th:first-child,
+.root tr > td:first-child {
+  padding-left: 30px;
+}
+
+.root tr > th:last-child,
+.root tr > td:last-child {
+  padding-right: 30px;
+}
+
+.col1 {
+  width: 122px;
+}
+
+.col2,
+.col3 {
+  min-width: 150px;
+}
+
+.col4 {
+  width: 82px;
+  text-align: center;
+}
+
+.thead {
+  background-color: #36304a;
+  color: white;
+}
+
+.thead th {
+  padding: 16px 10px 15px;
+  font-size: 18px;
+  font-weight: normal;
+  text-align: left;
+}
+
+.tbody tr:nth-child(even) {
+  background-color: rgba(245, 245, 245, 0.9);
+}
+
+.tbody tr:hover {
+  background-color: rgba(240, 240, 240, 0.9);
+}
+
+.item {
+  transition: all 0.5s ease;
+}
+
+.item td {
+  padding: 12px 10px;
+}
+
+.item input {
+  box-shadow: 0 0 0 1px #36304a;
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.count p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cont__btns {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.cont__btns button:not(:last-child) {
+  margin-right: 5px;
+}
+
+.actionBtns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.actionBtns button:not(:first-child) {
+  margin-left: 5px;
+}
