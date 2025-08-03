@@ -1,9 +1,11 @@
 .root {
   width: 100%;
   margin: 40px auto 0;
+
   background-color: rgba(255, 255, 255, 0.5);
   border-collapse: collapse;
   border-radius: 10px 10px 0 0;
+
   overflow: hidden;
 }
 
@@ -38,6 +40,7 @@
 
 .thead th {
   padding: 16px 10px 15px;
+
   font-size: 18px;
   font-weight: normal;
   text-align: left;
@@ -71,6 +74,7 @@
 
 .count p {
   margin: 0;
+
   font-size: 18px;
   font-weight: bold;
 }
