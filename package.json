@@ -3,14 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://YaroslavShilov.github.io/Count-New-Words",
+  "homepage": "http://YaroslavShilov.github.io/Count-New-Words/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist",
-    "server": "json-server --watch db.json --port 3001"
+    "server": "json-server --watch db.json --port 3001",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "json-server": "^1.0.0-beta.3",
