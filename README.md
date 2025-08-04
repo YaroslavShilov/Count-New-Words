@@ -18,3 +18,15 @@ With this application, you can add the word and count every time you come across
 
 ### Local Storage (for github pages)
 1. Run web version (github pages)
+
+---
+
+## Tools:
+1. Vite
+2. React
+3. TypeScript
+4. CSS Modules
+5. Json server
+6. GitHub Pages
+7. LocalStorage for web version (GitHub Pages)
+8. Json server for local (you'll get your own db.json file with all your words/meanings)
